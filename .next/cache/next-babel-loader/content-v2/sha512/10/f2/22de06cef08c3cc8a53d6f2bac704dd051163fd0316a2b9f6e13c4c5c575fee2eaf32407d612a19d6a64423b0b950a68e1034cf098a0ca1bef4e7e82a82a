@@ -1,0 +1,1 @@
+{"ast":null,"code":"export const resetFocus = () => {\n  const focusedElement = document.activeElement;\n\n  if (focusedElement && typeof focusedElement.blur === 'function') {\n    focusedElement.blur();\n  }\n};","map":null,"metadata":{},"sourceType":"module"}

@@ -1,0 +1,7 @@
+{
+  "/_app": "pages/_app.js",
+  "/_document": "pages/_document.js",
+  "/_error": "pages/_error.js",
+  "/admin/[consultorioId]/dashboard": "pages/admin/[consultorioId]/dashboard.js",
+  "/admin/[consultorioId]/solicitarTurno": "pages/admin/[consultorioId]/solicitarTurno.js"
+}
