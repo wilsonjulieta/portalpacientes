@@ -44,7 +44,7 @@ Router.events.on("routeChangeComplete", () => {
   hideLoad();
 });
 Router.events.on("routeChangeError", () => {
-  hideLoad();
+  hideLoad(); 
 });
 
 export default class MyApp extends App {
