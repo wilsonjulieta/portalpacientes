@@ -25,7 +25,6 @@ import PageChange from "components/PageChange/PageChange.js";
 
 import "assets/css/nextjs-material-dashboard.css?v=1.1.0";
 import ThemeContextProvider from "../context/ThemeContextProvider";
-import THEMES from "../constants/THEMES";
 import UserContextProvider from "../context/UserContextProvider";
 
 import nookies from 'nookies'
@@ -36,6 +35,8 @@ import MessageDialog from "../components/Dialogs/MessageDialog";
 import MessageDialogContextProvider from "../context/MessageDialogContextProvider";
 
 import '../styles/globals.css';
+import { getMetaInfo, getTheme } from "../constants/CONFIG.js";
+import MetaInfoContextProvider from "../context/MetaInfoContextProvider.js";
 
 Router.events.on("routeChangeStart", (url) => {
   showLoad(url);
@@ -44,7 +45,7 @@ Router.events.on("routeChangeComplete", () => {
   hideLoad();
 });
 Router.events.on("routeChangeError", () => {
-  hideLoad(); 
+  hideLoad();
 });
 
 export default class MyApp extends App {
@@ -165,25 +166,26 @@ export default class MyApp extends App {
     const Layout = Component.layout || (({ children }) => <>{children}</>);
 
     return (
-      <ThemeContextProvider theme={THEMES[consultorioId - 1]}>
-        <UserContextProvider initUser={{ ...initUser, consultorioId }}>
-          <React.Fragment>
-            <Head>
-              <meta
-                name="viewport"
-                content="width=device-width, initial-scale=1, shrink-to-fit=no"
-              />
-              <title>NextJS Material Dashboard by Creative Tim</title>
-              <script src="https://maps.googleapis.com/maps/api/js?key=YOUR_KEY_HERE"></script>
-            </Head>
-            <Layout>
-              <MessageDialogContextProvider>
-                <Component {...pageProps} />
-              </MessageDialogContextProvider>
-            </Layout>
-          </React.Fragment>
-        </UserContextProvider>
-      </ThemeContextProvider>
+      <MetaInfoContextProvider metaInfo={getMetaInfo(consultorioId)}>
+        <ThemeContextProvider theme={getTheme(consultorioId)}>
+          <UserContextProvider initUser={{ ...initUser, consultorioId }}>
+            <React.Fragment>
+              <Head>
+                <meta
+                  name="viewport"
+                  content="width=device-width, initial-scale=1, shrink-to-fit=no"
+                />
+                <script src="https://maps.googleapis.com/maps/api/js?key=YOUR_KEY_HERE"></script>
+              </Head>
+              <Layout>
+                <MessageDialogContextProvider>
+                  <Component {...pageProps} />
+                </MessageDialogContextProvider>
+              </Layout>
+            </React.Fragment>
+          </UserContextProvider>
+        </ThemeContextProvider>
+      </MetaInfoContextProvider>
     );
   }
 }

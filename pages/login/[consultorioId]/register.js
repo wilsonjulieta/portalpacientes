@@ -78,6 +78,8 @@ function OTPDialog({ open, setOpen, onClose, onConfirm, setActiveStep, consultor
 
   const confirmRef = useRef();
 
+  const [confirmEnabled, setConfirmEnabled] = useState(true);
+
   const handleCancel = () => {
     handleClose();
     onClose();
@@ -96,7 +98,11 @@ function OTPDialog({ open, setOpen, onClose, onConfirm, setActiveStep, consultor
       return;
     }
 
+    setConfirmEnabled(false);
+
     const validateResponse = await validateOTP(userId, code, consultorioId, await GLOBAL_GET_TOKEN());
+
+    setConfirmEnabled(true);
 
     if (validateResponse.success) {
       setCodeDisabled(true);
@@ -192,7 +198,7 @@ function OTPDialog({ open, setOpen, onClose, onConfirm, setActiveStep, consultor
         <Button onClick={handleClose} color="primary">
           Cancelar
         </Button>
-        <Button onClick={handleConfirm} color="primary">
+        <Button onClick={handleConfirm} color="primary" disabled={!confirmEnabled}>
           Confirmar
         </Button>
       </DialogActions>
@@ -472,7 +478,11 @@ function Register({ consultorioId, healthCareList }) {
                           autoComplete: "cellNumber",
                           onChange: handleChange
                         }}
+                        moreInputProps={{
+                          pattern: "^[0-9]{10}$"
+                        }}
                       />
+                      <FormHelperText className="formHelper">Se aceptan números de teléfono de 10 dígitos</FormHelperText>
                     </GridItem>
                     <GridItem xs={12} sm={12} md={6}>
                       <CustomInput

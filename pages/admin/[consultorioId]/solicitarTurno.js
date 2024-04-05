@@ -120,7 +120,7 @@ const styles = ({
     color: (props) => props.colorPrimary
   },
   profesionalImg: {
-    width: "10%",
+    width: "20%",
     border: (props) => "1px solid " + props.colorPrimary,
     borderRadius: "100%"
   }
@@ -344,7 +344,8 @@ function TurnosDisponibles({ turnsGrouped, setOpen, setTurnSelected, active, tur
                   </CardHeader>
                   <CardBody style={{ paddingBlock: "8px", paddingInline: "16px", display: "flex", alignItems: "center", justifyContent: "start" }}>
                     <img className={classes.profesionalImg}
-                      src={avatar} alt="..." />
+                      src={turno.avatarUrl} alt="..."
+                      onError={({currentTarget}) => currentTarget.src = avatar} />
                     <label style={{ fontSize: '18px', width: "60%", textAlign: "left", paddingInline: "6px", display: "block" }}>{turno.profesional}</label><br />
                     <Button color="primary" style={{ paddingRight: "10px", paddingLeft: "10px", margin: "auto", display: "block", width: "10%", borderRadius: "2rem", minWidth: "80px" }} size="small" onClick={() => { setOpen(true); setTurnSelected(turno) }}>Solicitar</Button>
                   </CardBody>
@@ -397,6 +398,8 @@ function ConfirmationDialog({ open, setOpen, turno }) {
     setConfirmEnabled(false);
 
     const requestTurnResponse = await requestTurn(user.consultorioId, await GLOBAL_GET_TOKEN(), { professionalId, fecha, hora, patienteId, horarioId });
+
+    setConfirmEnabled(true);
 
     console.log(requestTurnResponse);
 

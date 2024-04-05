@@ -16,11 +16,11 @@ const headerStyle = () => ({
     backgroundColor: (props) => props.colorPrimary 
   },
   appBar: {
-    backgroundColor: "#b4c3d0",
+    backgroundColor: (props) => props.colorPrimary,
     boxShadow: "none",
     borderBottom: "0",
     marginBottom: "0",
-    color: grayColor[7],
+    color: "white",
     transition: "all 150ms ease 0s",
     minHeight: "50px",
     display: "flex",

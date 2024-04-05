@@ -166,11 +166,13 @@ const appStyle = (theme) => ({
   },
   vicharacterSuccess: {
     color: (props) => props.colorSuccess,
-    borderColor: (props) => props.colorSuccess
+    borderColor: (props) => props.colorSuccess,
+    borderWidth: "2px"
   },
   vicharacterError: {
     color: (props) => props.colorError,
-    borderColor: (props) => props.colorError
+    borderColor: (props) => props.colorError,
+    borderWidth: "2px"
   },
   hrPrimaryColored: {
     borderTop: (props) => "1px solid " + props.colorPrimary
