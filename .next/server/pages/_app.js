@@ -948,7 +948,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _material_ui_core_styles__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(_material_ui_core_styles__WEBPACK_IMPORTED_MODULE_4__);
 /* harmony import */ var assets_jss_nextjs_material_dashboard_components_cardStyle_js__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! assets/jss/nextjs-material-dashboard/components/cardStyle.js */ "./assets/jss/nextjs-material-dashboard/components/cardStyle.js");
 
-var _jsxFileName = "C:\\DATOS\\THISYS\\SISTEMA\\PORTAL WEB\\Proyecto-Salud\\components\\Card\\Card.js";
+var _jsxFileName = "C:\\DATOS\\THISYS\\SISTEMA\\PORTAL WEB\\PortalPacientes\\components\\Card\\Card.js";
 
 function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
 
@@ -1032,7 +1032,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _material_ui_core_styles__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(_material_ui_core_styles__WEBPACK_IMPORTED_MODULE_4__);
 /* harmony import */ var assets_jss_nextjs_material_dashboard_components_cardBodyStyle_js__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! assets/jss/nextjs-material-dashboard/components/cardBodyStyle.js */ "./assets/jss/nextjs-material-dashboard/components/cardBodyStyle.js");
 
-var _jsxFileName = "C:\\DATOS\\THISYS\\SISTEMA\\PORTAL WEB\\Proyecto-Salud\\components\\Card\\CardBody.js";
+var _jsxFileName = "C:\\DATOS\\THISYS\\SISTEMA\\PORTAL WEB\\PortalPacientes\\components\\Card\\CardBody.js";
 
 function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
 
@@ -1114,7 +1114,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var assets_jss_nextjs_material_dashboard_components_cardHeaderStyle_js__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! assets/jss/nextjs-material-dashboard/components/cardHeaderStyle.js */ "./assets/jss/nextjs-material-dashboard/components/cardHeaderStyle.js");
 /* harmony import */ var _hooks_useTheme__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../../hooks/useTheme */ "./hooks/useTheme.js");
 
-var _jsxFileName = "C:\\DATOS\\THISYS\\SISTEMA\\PORTAL WEB\\Proyecto-Salud\\components\\Card\\CardHeader.js";
+var _jsxFileName = "C:\\DATOS\\THISYS\\SISTEMA\\PORTAL WEB\\PortalPacientes\\components\\Card\\CardHeader.js";
 
 function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
 
@@ -1204,7 +1204,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var assets_jss_nextjs_material_dashboard_components_buttonStyle_js__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! assets/jss/nextjs-material-dashboard/components/buttonStyle.js */ "./assets/jss/nextjs-material-dashboard/components/buttonStyle.js");
 /* harmony import */ var _hooks_useTheme__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../../hooks/useTheme */ "./hooks/useTheme.js");
 
-var _jsxFileName = "C:\\DATOS\\THISYS\\SISTEMA\\PORTAL WEB\\Proyecto-Salud\\components\\CustomButtons\\Button.js";
+var _jsxFileName = "C:\\DATOS\\THISYS\\SISTEMA\\PORTAL WEB\\PortalPacientes\\components\\CustomButtons\\Button.js";
 
 function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
 
@@ -1307,7 +1307,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _material_ui_icons_ReportProblem__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @material-ui/icons/ReportProblem */ "@material-ui/icons/ReportProblem");
 /* harmony import */ var _material_ui_icons_ReportProblem__WEBPACK_IMPORTED_MODULE_7___default = /*#__PURE__*/__webpack_require__.n(_material_ui_icons_ReportProblem__WEBPACK_IMPORTED_MODULE_7__);
 
-var _jsxFileName = "C:\\DATOS\\THISYS\\SISTEMA\\PORTAL WEB\\Proyecto-Salud\\components\\Dialogs\\MessageDialog.js";
+var _jsxFileName = "C:\\DATOS\\THISYS\\SISTEMA\\PORTAL WEB\\PortalPacientes\\components\\Dialogs\\MessageDialog.js";
 
 
 
@@ -1440,7 +1440,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var assets_jss_nextjs_material_dashboard_js__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! assets/jss/nextjs-material-dashboard.js */ "./assets/jss/nextjs-material-dashboard.js");
 /* harmony import */ var _routes__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../routes */ "./routes.js");
 
-var _jsxFileName = "C:\\DATOS\\THISYS\\SISTEMA\\PORTAL WEB\\Proyecto-Salud\\components\\PageChange\\PageChange.js";
+var _jsxFileName = "C:\\DATOS\\THISYS\\SISTEMA\\PORTAL WEB\\PortalPacientes\\components\\PageChange\\PageChange.js";
 
 function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
 
@@ -1731,7 +1731,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_1__);
 /* harmony import */ var _components_Dialogs_MessageDialog__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../components/Dialogs/MessageDialog */ "./components/Dialogs/MessageDialog.js");
 
-var _jsxFileName = "C:\\DATOS\\THISYS\\SISTEMA\\PORTAL WEB\\Proyecto-Salud\\context\\MessageDialogContextProvider.js";
+var _jsxFileName = "C:\\DATOS\\THISYS\\SISTEMA\\PORTAL WEB\\PortalPacientes\\context\\MessageDialogContextProvider.js";
 
 
 const MessageDialogContext = /*#__PURE__*/Object(react__WEBPACK_IMPORTED_MODULE_1__["createContext"])(null);
@@ -1840,7 +1840,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react */ "react");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_2__);
 
-var _jsxFileName = "C:\\DATOS\\THISYS\\SISTEMA\\PORTAL WEB\\Proyecto-Salud\\context\\MetaInfoContextProvider.js";
+var _jsxFileName = "C:\\DATOS\\THISYS\\SISTEMA\\PORTAL WEB\\PortalPacientes\\context\\MetaInfoContextProvider.js";
 
 
 const MetaInfoContext = /*#__PURE__*/Object(react__WEBPACK_IMPORTED_MODULE_2__["createContext"])(null);
@@ -1900,7 +1900,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react */ "react");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_1__);
 
-var _jsxFileName = "C:\\DATOS\\THISYS\\SISTEMA\\PORTAL WEB\\Proyecto-Salud\\context\\ThemeContextProvider.js";
+var _jsxFileName = "C:\\DATOS\\THISYS\\SISTEMA\\PORTAL WEB\\PortalPacientes\\context\\ThemeContextProvider.js";
 
 const ThemeContext = /*#__PURE__*/Object(react__WEBPACK_IMPORTED_MODULE_1__["createContext"])(null);
 function ThemeContextProvider({
@@ -1942,7 +1942,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react */ "react");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_1__);
 
-var _jsxFileName = "C:\\DATOS\\THISYS\\SISTEMA\\PORTAL WEB\\Proyecto-Salud\\context\\UserContextProvider.js";
+var _jsxFileName = "C:\\DATOS\\THISYS\\SISTEMA\\PORTAL WEB\\PortalPacientes\\context\\UserContextProvider.js";
 
 const UserContext = /*#__PURE__*/Object(react__WEBPACK_IMPORTED_MODULE_1__["createContext"])(null);
 function UserContextProvider({
@@ -2202,7 +2202,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _context_MetaInfoContextProvider_js__WEBPACK_IMPORTED_MODULE_18__ = __webpack_require__(/*! ../context/MetaInfoContextProvider.js */ "./context/MetaInfoContextProvider.js");
 
 
-var _jsxFileName = "C:\\DATOS\\THISYS\\SISTEMA\\PORTAL WEB\\Proyecto-Salud\\pages\\_app.js";
+var _jsxFileName = "C:\\DATOS\\THISYS\\SISTEMA\\PORTAL WEB\\PortalPacientes\\pages\\_app.js";
 
 function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
 
@@ -2819,7 +2819,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react_dom__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react_dom__WEBPACK_IMPORTED_MODULE_1__);
 /* harmony import */ var _components_PageChange_PageChange__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../components/PageChange/PageChange */ "./components/PageChange/PageChange.js");
 
-var _jsxFileName = "C:\\DATOS\\THISYS\\SISTEMA\\PORTAL WEB\\Proyecto-Salud\\utils\\loading.js";
+var _jsxFileName = "C:\\DATOS\\THISYS\\SISTEMA\\PORTAL WEB\\PortalPacientes\\utils\\loading.js";
 
 
 function showLoad(url) {
