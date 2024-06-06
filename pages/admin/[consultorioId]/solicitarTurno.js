@@ -143,7 +143,7 @@ function SolicitarTurno({ professionals, especialidades, sucursales, consultorio
     if (user.consultorioId === "1" && !localStorage.getItem("messageTurnosConsulta")) {
       showConsultasMessage.current = false;
       localStorage.setItem("messageTurnosConsulta", "true");
-      messageDialog.messageOpen("Los turnos que se obtienen son solo para consulta, para otros estudios comunicarse telefónicamente.", "Información");
+      messageDialog.messageOpen("Los turnos que se obtienen son sólo para consulta y electrocardiograma, para otros estudios comunicarse telefónicamente.", "Información");
     }
   }, []);
 
@@ -302,7 +302,7 @@ function SolicitarTurno({ professionals, especialidades, sucursales, consultorio
                 </GridItem>
                 <GridItem xs={12} sm={12} md={2} style={{ textAlign: "center" }}>
                   <Button style={{ lineHeight: 0, padding: "12px", }} startIcon={<ClearIcon />} onClick={resetFilters} color="primary">
-                    Limpiar
+                    Limpiar filtro
                   </Button>
                 </GridItem>
               </GridContainer>
@@ -346,9 +346,13 @@ function TurnosDisponibles({ turnsGrouped, setOpen, setTurnSelected, active, tur
                     <img className={classes.profesionalImg}
                       src={turno.avatarUrl} alt="..."
                       onError={({currentTarget}) => currentTarget.src = avatar} />
-                    <label style={{ fontSize: '18px', width: "60%", textAlign: "left", paddingInline: "6px", display: "block" }}>{turno.profesional}</label><br />
-                    <Button color="primary" style={{ paddingRight: "10px", paddingLeft: "10px", margin: "auto", display: "block", width: "10%", borderRadius: "2rem", minWidth: "80px" }} size="small" onClick={() => { setOpen(true); setTurnSelected(turno) }}>Solicitar</Button>
-                  </CardBody>
+                    <div style={{ display: "flex", flexDirection: "column", marginLeft: "10px" }}>
+                      <label style={{ fontSize: '18px', textAlign: "left", marginBottom: "5px" }}>{turno.profesional}</label>
+                      <label style={{ fontSize: '14px', textAlign: "left", marginBottom: "5px" }}>MP {turno.matricula}</label>
+                      <label style={{ fontSize: '15px', textAlign: "left", marginBottom: "5px" }}>Esp. {turno.especialidad}</label>
+                    </div>
+                    <Button color="primary" style={{ paddingRight: "10px", paddingLeft: "10px", margin: "auto", borderRadius: "2rem", minWidth: "80px" }} size="small" onClick={() => { setOpen(true); setTurnSelected(turno) }}>Solicitar</Button>
+                  </CardBody>                
                 </Card>
               </GridItem>)
           }
@@ -360,7 +364,7 @@ function TurnosDisponibles({ turnsGrouped, setOpen, setTurnSelected, active, tur
       turnsGrouped.length === 0 && active && !loading && <h3 key={"t1" + turnsGroupedKey} className={"fade-in-slow m-auto text-center " + classes.colorSecondary}>No hay turnos disponibles seg&uacute;n lo seleccionado.</h3>
     }
     {
-      showConsultasMessage && !active && !loading && <h3 key={"t2" + turnsGroupedKey} className={"fade-in-slow m-auto text-center " + classes.colorPrimary}>Los turnos que se obtienen son solo para consulta, para otros estudios comunicarse telefónicamente.</h3>
+      showConsultasMessage && !active && !loading && <h3 key={"t2" + turnsGroupedKey} className={"fade-in-slow m-auto text-center " + classes.colorPrimary}>Los turnos que se obtienen son sólo para consulta y electrocardiograma, para otros estudios comunicarse telefónicamente.</h3>
     }
     {
       loading &&
