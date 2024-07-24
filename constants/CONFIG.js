@@ -3,21 +3,26 @@ import THEMES from "./THEMES";
 const consultoriosNameToId = {
     "ICC": 0,
     "1": 0,
+    "URO":2,
     "TEST": 4
 }
 
 const consultoriosFullName = {
     "ICC": "Instituto Clínico Cardiológico",
+    "URO": "Unidad Urológica MDP",
     "TEST": "Instituto test"
 }
 
+
 const pageTitles = {
     "ICC": "Portal Pacientes ICC",
-    "TEST": "Portal De Testing",
-}
+    "URO": "Portal Pacientes Unidad Urologica",
+    "TEST": "Portal De Testing"
+} 
 
 const favIconRoutes = {
     "ICC": "ICC.ico",
+    "URO": "URO.ico",
     "TEST": "test.png"
 }
 

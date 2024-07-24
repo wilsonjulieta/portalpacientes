@@ -644,7 +644,7 @@ svg {
 
 @media (width < 500px) {
   .solicitarTurnoDialog .dialogCardHeader {
-    color: black !important;
+    /* color: black !important; */
     font-size: 1.2rem !important;
   }
 }
@@ -666,7 +666,7 @@ svg {
 
 @media (width < 500px) {
   .messageDialog .dialogCardHeader {
-    color: black !important;
+    /* color: black !important; */
     font-size: 1.2rem !important;
   }
 }

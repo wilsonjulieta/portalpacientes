@@ -51,7 +51,8 @@ If you have questions or need help integrating the product please [contact us](h
 
 ## Instalacion
 - Clonar la repo
-- Actualmente funciona con Node 14, las versiones mas nuevas tienen errores de compatibilidad con este template
+- Actualmente funciona con Node 14.21.3, las versiones mas nuevas tienen errores de compatibilidad con este template
+- Ademas requiere tener instalada la ultima version de Python
 - npm install --force
 - npm run dev
 - Abrir en localhost:3000

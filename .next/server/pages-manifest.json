@@ -2,6 +2,5 @@
   "/_app": "pages/_app.js",
   "/_document": "pages/_document.js",
   "/_error": "pages/_error.js",
-  "/admin/[consultorioId]/solicitarTurno": "pages/admin/[consultorioId]/solicitarTurno.js",
-  "/admin/[consultorioId]/gestionTurnos": "pages/admin/[consultorioId]/gestionTurnos.js"
+  "/login/[consultorioId]": "pages/login/[consultorioId].js"
 }

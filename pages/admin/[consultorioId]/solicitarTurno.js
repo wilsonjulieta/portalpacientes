@@ -354,7 +354,7 @@ function TurnosDisponibles({ turnsGrouped, setOpen, setTurnSelected, active, tur
                     <Button color="primary" style={{ paddingRight: "10px", paddingLeft: "10px", margin: "auto", borderRadius: "2rem", minWidth: "80px" }} size="small" onClick={() => { setOpen(true); setTurnSelected(turno) }}>Solicitar</Button>
                   </CardBody>                
                 </Card>
-              </GridItem>)
+              </GridItem>) 
           }
         </GridContainer>
       </div>

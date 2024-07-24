@@ -37,6 +37,7 @@ import MessageDialogContextProvider from "../context/MessageDialogContextProvide
 import '../styles/globals.css';
 import { getMetaInfo, getTheme } from "../constants/CONFIG.js";
 import MetaInfoContextProvider from "../context/MetaInfoContextProvider.js";
+import errorLog from "../utils/debug.js";
 
 Router.events.on("routeChangeStart", (url) => {
   showLoad(url);
@@ -73,11 +74,11 @@ export default class MyApp extends App {
   // La logica requerida solo es requerida al correr del server al principio, por tanto no valido que corra desde el cliente.
   static async getInitialProps({ Component, router, ctx }) {
     let pageProps = {};
-
+    
     let { consultorioId } = router.query;
-
+    
     const cookies = nookies.get(ctx)
-
+    
     // Setear o pedir id de consultorio
     if (consultorioId) {
       // Set
@@ -89,40 +90,41 @@ export default class MyApp extends App {
     else {
       consultorioId = cookies.consultorioId;
     }
-
+    
     // Redirigir de admin si el usuario no esta logueado
     if (cookies.id === undefined && router.asPath.includes("admin") && typeof window === 'undefined') {
       ctx.res.writeHead(302, {
         Location: '/login/' + consultorioId,
         'Content-Type': 'text/html; charset=utf-8',
       });
-      ctx.res.end();
+      return ctx.res.end();
     }
 
+    
     // Setear si existe, el usuario que ya esta logueado
     let initUser;
     if (cookies.id !== undefined && Number(cookies.loginTries ?? 0) <= 2 && typeof window === 'undefined' && !router.asPath.includes("server-error")) {
       try {
         const { id, token } = { id: cookies.id, token: await GLOBAL_GET_TOKEN(ctx) };
-
+        
         console.log({ id, consultorioId, token });
-
+        
         let patientResponse = await getPatient(id, consultorioId, token);
-
+        
         console.log({ patientResponse });
-
+        
         if (!patientResponse.success) {
           throw Error("");
         }
-
+        
         initUser = patientResponse.data;
-
+        
         if (!router.asPath.includes("admin") && !router.asPath.includes("testing")) {
           ctx.res.writeHead(302, {
             Location: '/admin/' + consultorioId + "/dashboard",
             'Content-Type': 'text/html; charset=utf-8',
           });
-          ctx.res.end();
+          return ctx.res.end();
           // ctx.res.finished = true;
         }
       } catch (error) {
@@ -141,12 +143,13 @@ export default class MyApp extends App {
             path: "/"
           });
         }
-
+        errorLog("%cENTRANDO PAPA");
+        
         ctx.res.writeHead(302, {
           Location: '/login/' + consultorioId + "/server-error",
           'Content-Type': 'text/html; charset=utf-8',
         });
-        ctx.res.end();
+        return ctx.res.end();
         // ctx.res.finished = true;
 
 
