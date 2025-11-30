@@ -27,7 +27,7 @@ import "assets/css/nextjs-material-dashboard.css?v=1.1.0";
 import ThemeContextProvider from "../context/ThemeContextProvider";
 import UserContextProvider from "../context/UserContextProvider";
 
-import nookies from 'nookies'
+import nookies, { destroyCookie } from 'nookies'
 import { hideLoad, showLoad } from "../utils/loading";
 import { getPatient } from "../services/userAuth";
 import GLOBAL_GET_TOKEN from "../utils/token";
@@ -78,8 +78,15 @@ export default class MyApp extends App {
     let { consultorioId } = router.query;
     
     const cookies = nookies.get(ctx)
+
+    console.log({cookies, consultorioId, router, query: router.query});    
     
     // Setear o pedir id de consultorio
+    if (cookies.consultorioId && consultorioId && consultorioId != cookies.consultorioId) {
+      Object.keys(cookies).forEach((cookieName) => {
+        nookies.destroy(ctx, cookieName, { path: '/' })
+      })
+    }
     if (consultorioId) {
       // Set
       nookies.set(ctx, 'consultorioId', consultorioId, {
@@ -90,15 +97,18 @@ export default class MyApp extends App {
     else {
       consultorioId = cookies.consultorioId;
     }
+
+    console.log({cookiesUpdated: nookies.get(ctx)});
+    
     
     // Redirigir de admin si el usuario no esta logueado
-    if (cookies.id === undefined && router.asPath.includes("admin") && typeof window === 'undefined') {
-      ctx.res.writeHead(302, {
-        Location: '/login/' + consultorioId,
-        'Content-Type': 'text/html; charset=utf-8',
-      });
-      return ctx.res.end();
-    }
+    // if (cookies.id === undefined && router.asPath.includes("admin") && typeof window === 'undefined') {
+    //   ctx.res.writeHead(302, {
+    //     Location: '/login/' + consultorioId,
+    //     'Content-Type': 'text/html; charset=utf-8',
+    //   });
+    //   return ctx.res.end();
+    // }
 
     
     // Setear si existe, el usuario que ya esta logueado
@@ -128,22 +138,22 @@ export default class MyApp extends App {
           // ctx.res.finished = true;
         }
       } catch (error) {
-        nookies.set(ctx, 'loginTries', (Number(cookies.loginTries ?? 0)) + 1, {
-          maxAge: 60,
-          path: '/',
-        })
-        if (Number(cookies.loginTries) === 2) {
-          nookies.destroy(ctx, "id", {
-            path: "/"
-          });
-          nookies.destroy(ctx, "dni", {
-            path: "/"
-          });
-          nookies.destroy(ctx, "loginTries", {
-            path: "/"
-          });
-        }
-        errorLog("%cENTRANDO PAPA");
+        // nookies.set(ctx, 'loginTries', (Number(cookies.loginTries ?? 0)) + 1, {
+        //   maxAge: 60,
+        //   path: '/',
+        // })
+        // if (Number(cookies.loginTries) === 2) {
+        //   nookies.destroy(ctx, "id", {
+        //     path: "/"
+        //   });
+        //   nookies.destroy(ctx, "dni", {
+        //     path: "/"
+        //   });
+        //   nookies.destroy(ctx, "loginTries", {
+        //     path: "/"
+        //   });
+        // }
+        // errorLog("%cENTRANDO PAPA");
         
         ctx.res.writeHead(302, {
           Location: '/login/' + consultorioId + "/server-error",

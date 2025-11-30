@@ -39,6 +39,8 @@ import { getNextTurns } from "../../../services/turns";
 import nookies from 'nookies'
 import GLOBAL_GET_TOKEN from "../../../utils/token";
 
+import LocalHospitalIcon from '@material-ui/icons/LocalHospital';
+
 const styles = ({
   ...adminStyles(),
   cardCategoryWhite: {
@@ -144,12 +146,23 @@ function Dashboard({ nextTurns }) {
                   query: { consultorioId },
                 }}>
                   <a style={{ width: "100%" }}>
-                    <Button color="primary" style={{ fontSize: "1.25em", width: "100%" }}>
+                    <Button color="primary" style={{ fontSize: "1.1em", width: "100%" }}>
                       <AddIcon style={{ fontSize: "1.25em" }} />
                       Solicitar Turno
                     </Button>
                   </a>
                 </Link>
+                {user.portal_habilitado && <Link passHref href={{
+                  pathname: '/admin/[consultorioId]/estudios',
+                  query: { consultorioId },
+                }}>
+                  <a style={{ width: "100%" }}>
+                    <Button color="primary" style={{ fontSize: "1.1em", width: "100%" }}>
+                      <LocalHospitalIcon style={{ fontSize: "1.25em" }} />
+                      Mis estudios
+                    </Button>
+                  </a>
+                </Link>}
                 {/* <Link passHref href={{
                   pathname: '/admin/[consultorioId]/solicitarReceta',
                   query: { consultorioId },

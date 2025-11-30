@@ -27,6 +27,9 @@ import Key from '@material-ui/icons/VpnKey';
 import Calendar from '@material-ui/icons/Today';
 import Recetas from '@material-ui/icons/ListAlt';
 
+import LocalHospitalIcon from '@material-ui/icons/LocalHospital';
+
+
 
 const dashboardRoutes = [
   {
@@ -59,6 +62,14 @@ const dashboardRoutes = [
     rtlName: "ملف تعريفي للمستخدم",
     icon: Calendar,
 
+    layout: "/admin",
+  },
+  {
+    path: "/estudios",
+    name: "Estudios Realizados",
+    rtlName: "ملف تعريفي للمستخدم",
+    icon: LocalHospitalIcon,
+    requierePortal: true,
     layout: "/admin",
   },
   // {

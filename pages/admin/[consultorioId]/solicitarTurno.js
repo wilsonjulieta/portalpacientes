@@ -53,13 +53,20 @@ import { fullDateToDayMonth, getFullNameOfDate } from "../../../utils/dates";
 import { MessageDialogContext } from "../../../context/MessageDialogContextProvider";
 import { useRouter } from "next/router";
 import LoadingSpinner from "../../../components/Utils/LoadingSpinner";
+import { getHealthCareAllowedForTurns } from "../../../services/healthcare";
+import { getMetaInfo } from "../../../constants/CONFIG";
+import DateRangePicker from "../../../components/DateRangePicker/DateRangePicker";
 
 export async function getServerSideProps(context) {
   const { consultorioId } = context.query;
 
-  const cookies = nookies.get(context);
+  const cookies = nookies.get(context);  
 
   const professionalsResponse = await getProfessionals(consultorioId, await GLOBAL_GET_TOKEN(context));
+
+
+  console.log({professionalsResponse});
+  
 
   if (!professionalsResponse.success) {
     return {
@@ -137,13 +144,42 @@ function SolicitarTurno({ professionals, especialidades, sucursales, consultorio
 
   const { user } = useContext(UserContext);
 
-  const showConsultasMessage = useRef(true);
+  const solicitarTurnoLeyenda = useRef(true);
+
+  const [enableTurns, setEnableTurns] = useState(true);
+  const [coberturaMessage, setcoberturaMessage] = useState("");
+
+  useEffect(async () => {
+    const healthCareAllowedForTurns = await getHealthCareAllowedForTurns(consultorioId, await GLOBAL_GET_TOKEN(), user.medicalCareId);
+  
+    if (!healthCareAllowedForTurns.success) {
+      return {
+        redirect: {
+          destination: '/login/' + consultorioId + "/server-error",
+          permanent: false,
+        },
+      }
+    }
+
+    const data = healthCareAllowedForTurns.data;
+
+    console.log({data});
+
+    if (!data.web) {
+      setEnableTurns(false);
+    }
+    setcoberturaMessage(data.observaciones);
+    
+  }, []);
+
+
+  const { solicitarTurnoMessage } = getMetaInfo(consultorioId);
 
   useEffect(() => {
-    if (user.consultorioId === "1" && !localStorage.getItem("messageTurnosConsulta")) {
-      showConsultasMessage.current = false;
+    if (user.consultorioId?.toLowerCase() === "icc" && !localStorage.getItem("messageTurnosConsulta")) {
+      solicitarTurnoLeyenda.current = false;
       localStorage.setItem("messageTurnosConsulta", "true");
-      messageDialog.messageOpen("Los turnos que se obtienen son sólo para consulta y electrocardiograma, para otros estudios comunicarse telefónicamente.", "Información");
+      messageDialog.messageOpen(solicitarTurnoMessage, "Información");
     }
   }, []);
 
@@ -174,15 +210,37 @@ function SolicitarTurno({ professionals, especialidades, sucursales, consultorio
     setEspecialidadId("");
     setProfesionalId("");
     setSucursalId("");
+    setStartDate(new Date());
+    setEndDate(null);
     setTurnsGrouped([]);
   }
 
   const professionalsFiltered = professionals.filter(professional => especialidadId === "" || professional.specialty.id === especialidadId);
 
+  const [startDate, setStartDate] = useState(new Date());
+  const [endDate, setEndDate] = useState(null);
+
+  const onStartDateChange = (date) => {
+    if (date && !isNaN(date.getTime())) {
+      setStartDate(date); // This must be a NEW Date object
+    }
+  };
+  const onEndDateChange = (date) => {
+    if (date && !isNaN(date.getTime())) {
+      setEndDate(date); // This must be a NEW Date object
+    }
+  };
+
   useEffect(() => {
     async function getTurns() {
+      console.log({startDate, endDate});
+
+      const fechaInicio = startDate?.toISOString() ?? "";
+      const fechaFin = endDate?.toISOString() ?? "";
+      
+
       setLoading(true);
-      const turnsResponse = await getAvailableTurns(consultorioId, await GLOBAL_GET_TOKEN(), sucursalId, especialidadId, profesionalId, user.id);
+      const turnsResponse = await getAvailableTurns(consultorioId, await GLOBAL_GET_TOKEN(), sucursalId, especialidadId, profesionalId, user.id, fechaInicio, fechaFin);
       setLoading(false);
 
       if (!turnsResponse.success) {
@@ -208,9 +266,14 @@ function SolicitarTurno({ professionals, especialidades, sucursales, consultorio
     if (especialidadId === "" && profesionalId === "" && sucursalId === "")
       return;
 
-    showConsultasMessage.current = true;
+    solicitarTurnoLeyenda.current = true;
     getTurns();
-  }, [especialidadId, profesionalId, sucursalId]);
+  }, [especialidadId, profesionalId, sucursalId, startDate, endDate]);
+
+  console.log("log:", {startDate, endDate});
+  
+
+  
 
   return (
     <div>
@@ -221,20 +284,20 @@ function SolicitarTurno({ professionals, especialidades, sucursales, consultorio
               <h3 className={classes.cardTitleWhite}><CalendarIcon fontSize="large" />Solicitud de Turnos</h3>
             </CardHeader>
             <CardBody style={{ padding: "10px 20px" }}>
-              <GridContainer style={{ rowGap: "1.5em" }}>
-                <GridItem xs={12} sm={12} md={4}>
-                  <FormControl fullWidth key="especialidadForm">
-                    <InputLabel className={classes.label + " " + classes.labelEnabled} variant="standard" htmlFor="uncontrolled-native">
+              <GridContainer style={{ rowGap: "1.5em", alignItems: "center" }}>
+                <GridItem xs={12} sm={12} md={3}>
+                  <FormControl fullWidth key="especialidadForm" disabled={!enableTurns}>
+                    <InputLabel className={classes.label + " " + classes.labelEnabled} variant="standard" htmlFor="uncontrolled-native3">
                       Elija Especialidad
                     </InputLabel>
-                    <Select
+                    <Select                      
                       className={classes.select}
                       classes={{ root: classes.selectRoot }}
                       inputProps={{
-                        name: 'especialidad',
+                        name: 'especialidad',                        
                         key: 'especialidad',
                         value: especialidadId,
-                        id: 'uncontrolled-native',
+                        id: 'uncontrolled-native3',
                         required: false,
                         onChange: (e) => { setEspecialidadId(e.target.value); setProfesionalId("") }
                       }}
@@ -247,9 +310,9 @@ function SolicitarTurno({ professionals, especialidades, sucursales, consultorio
                     </Select>
                   </FormControl>
                 </GridItem>
-                <GridItem xs={12} sm={12} md={3}>
-                  <FormControl fullWidth key="profesionalForm" >
-                    <InputLabel className={classes.label + " " + classes.labelEnabled} variant="standard" htmlFor="uncontrolled-native">
+                <GridItem xs={12} sm={12} md={2}>
+                  <FormControl fullWidth key="profesionalForm" disabled={!enableTurns}>
+                    <InputLabel className={classes.label + " " + classes.labelEnabled} variant="standard" htmlFor="uncontrolled-native2">
                       Elija Profesional
                     </InputLabel>
                     <Select
@@ -259,7 +322,7 @@ function SolicitarTurno({ professionals, especialidades, sucursales, consultorio
                         name: 'profesional',
                         key: 'profesional',
                         value: profesionalId,
-                        id: 'uncontrolled-native',
+                        id: 'uncontrolled-native2',
                         required: true,
                         onChange: (e) => setProfesionalId(e.target.value)
                       }}
@@ -274,7 +337,7 @@ function SolicitarTurno({ professionals, especialidades, sucursales, consultorio
                   </FormControl>
                 </GridItem>
 
-                <GridItem xs={12} sm={12} md={3}>
+                <GridItem xs={12} sm={12} md={2}>
                   <FormControl fullWidth key="lugarForm" disabled={especialidadId === "" && profesionalId === ""}>
                     <InputLabel className={classes.label + " " + classes.labelEnabled} variant="standard" htmlFor="uncontrolled-native">
                       Elija Lugar
@@ -300,19 +363,35 @@ function SolicitarTurno({ professionals, especialidades, sucursales, consultorio
                     {/* <FormHelperText style={{ "marginTop": "unset" }} >Opcional</FormHelperText> */}
                   </FormControl>
                 </GridItem>
-                <GridItem xs={12} sm={12} md={2} style={{ textAlign: "center" }}>
-                  <Button style={{ lineHeight: 0, padding: "12px", }} startIcon={<ClearIcon />} onClick={resetFilters} color="primary">
-                    Limpiar filtro
-                  </Button>
+                <GridItem xs={12} sm={12} md={3}>
+                  <DateRangePicker
+                    startDate={startDate}
+                    endDate={endDate}
+                    onStartDateChange={onStartDateChange}
+                    onEndDateChange={onEndDateChange}
+                    disabled={especialidadId === "" && profesionalId === ""}
+                    disablePast={true}
+                  />
                 </GridItem>
+                <GridItem xs={12} sm={12} md={2} style={{ textAlign: "center" }}>
+                  {enableTurns && <Button style={{ lineHeight: 0, padding: "12px", }} startIcon={<ClearIcon />} onClick={resetFilters} color="primary">
+                    Limpiar filtro
+                  </Button>}
+                </GridItem>
+
+
+                 
               </GridContainer>
             </CardBody>
           </Card>
           <TurnosDisponibles turnsGrouped={turnsGrouped} setOpen={setOpen} setTurnSelected={setTurnSelected}
             active={!(especialidadId === "" && profesionalId === "" && sucursalId === "")}
             turnsGroupedKey={especialidadId + "," + profesionalId + "," + sucursalId}
-            showConsultasMessage={showConsultasMessage.current}
-            loading={loading} />
+            solicitarTurnoLeyenda={solicitarTurnoLeyenda.current}
+            loading={loading} 
+            coberturaMessage={coberturaMessage}
+            consultorioId={consultorioId}
+          />
         </GridItem>
       </GridContainer>
       <ConfirmationDialog
@@ -325,8 +404,10 @@ function SolicitarTurno({ professionals, especialidades, sucursales, consultorio
   );
 }
 
-function TurnosDisponibles({ turnsGrouped, setOpen, setTurnSelected, active, turnsGroupedKey, showConsultasMessage, loading }) {
+function TurnosDisponibles({ turnsGrouped, setOpen, setTurnSelected, active, turnsGroupedKey, solicitarTurnoLeyenda, coberturaMessage, loading, consultorioId }) {
   const classes = useTheme(styles);
+
+  const { solicitarTurnoMessage } = getMetaInfo(consultorioId);
 
   return <>
     {active &&
@@ -360,11 +441,23 @@ function TurnosDisponibles({ turnsGrouped, setOpen, setTurnSelected, active, tur
       </div>
       )
     }
-    {
-      turnsGrouped.length === 0 && active && !loading && <h3 key={"t1" + turnsGroupedKey} className={"fade-in-slow m-auto text-center " + classes.colorSecondary}>No hay turnos disponibles seg&uacute;n lo seleccionado.</h3>
-    }
-    {
-      showConsultasMessage && !active && !loading && <h3 key={"t2" + turnsGroupedKey} className={"fade-in-slow m-auto text-center " + classes.colorPrimary}>Los turnos que se obtienen son sólo para consulta y electrocardiograma, para otros estudios comunicarse telefónicamente.</h3>
+    {!loading && <div className="m-auto">
+      {
+        turnsGrouped.length === 0 && active && !loading && <h3 key={"t1" + turnsGroupedKey} className={"fade-in-slow m-auto text-center " + classes.colorSecondary}>No hay turnos disponibles seg&uacute;n lo seleccionado.</h3>
+      }
+      {
+        (!coberturaMessage || true) && solicitarTurnoLeyenda && !active && !loading && <h3 key={"t2" + turnsGroupedKey} className={"fade-in-slow m-auto text-center " + classes.colorPrimary}>{solicitarTurnoMessage}</h3>
+      }
+      {
+      !loading && <>
+        <br />
+        <br />
+      </>
+      }
+      {
+        coberturaMessage && !active && !loading && <h3 key={"t3" + turnsGroupedKey} className={"fade-in-slow m-auto text-center " + classes.colorPrimary}>{coberturaMessage}</h3>
+      }
+    </div>
     }
     {
       loading &&

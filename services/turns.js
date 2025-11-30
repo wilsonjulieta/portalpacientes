@@ -98,12 +98,12 @@ export async function getSucursales(consultorioId, token) {
     return sucursalesResponse;
 }
 
-export async function getAvailableTurns(consultorioId, token, sucursalId, especialidadId, profesionalId, patientId) {
+export async function getAvailableTurns(consultorioId, token, sucursalId, especialidadId, profesionalId, patientId, fechaInicio, fechaFin) {
 
     let turnsResponse;
 
     try {
-        const response = await GET(consultorioId, token, `turns/available?sucursalId=${sucursalId}&especialidadId=${especialidadId}&profesionalId=${profesionalId}&pacienteId=${patientId}`);
+        const response = await GET(consultorioId, token, `turns/available?sucursalId=${sucursalId}&especialidadId=${especialidadId}&profesionalId=${profesionalId}&pacienteId=${patientId}&fechaInicio=${fechaInicio}&fechaFin=${fechaFin}`);
 
         if (response.status !== 200) //Si falla se va al catch directamente
             if (response.headers.get("content-type").includes("application/json")) {

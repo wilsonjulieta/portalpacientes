@@ -1,5 +1,5 @@
 /*eslint-disable*/
-import React from "react";
+import React, { useContext } from "react";
 import classNames from "classnames";
 import PropTypes from "prop-types";
 import Link from "next/link";
@@ -18,12 +18,16 @@ import RTLNavbarLinks from "components/Navbars/RTLNavbarLinks.js";
 
 import styles from "assets/jss/nextjs-material-dashboard/components/sidebarStyle.js";
 import { logout } from "../../utils/auth";
+import { UserContext } from "../../context/UserContextProvider";
 
 export default function Sidebar(props) {
   // used for checking current route
   const router = useRouter();
 
   const consultorioId = router.query?.consultorioId;
+
+  const { user } = useContext(UserContext); 
+  
 
   // creates styles for this component
   const useStyles = makeStyles(styles);
@@ -35,7 +39,7 @@ export default function Sidebar(props) {
   const { color, logo, image, logoText, routes } = props;
   var links = (
     <List className={classes.list}>
-      {routes.map((prop, key) => {
+      {routes.filter(route => !route.requierePortal || user.portal_habilitado).map((prop, key) => {
         const whiteFontClasses = classNames({
           [" " + classes.whiteFont]:
             activeRoute(prop.layout + prop.path) ||
@@ -124,9 +128,9 @@ export default function Sidebar(props) {
           [classes.logoLinkRTL]: props.rtlActive,
         })}
       >
-        <div className={classes.logoImage}>
+        {logo && <div className={classes.logoImage}>
           <img src={logo} alt="logo" className={classes.img} />
-        </div>
+        </div>}
         {logoText}
       </a>
     </div>

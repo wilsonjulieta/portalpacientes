@@ -92,6 +92,12 @@ function OTPDialog({ open, setOpen, onClose, onConfirm, setActiveStep, consultor
     }
   }
 
+  useEffect(() => {
+    if (code.length === 6) {
+      handleConfirm();
+    }
+  }, [code])
+
   const handleConfirm = async () => {
     if (!document.getElementById("verifInput").reportValidity()) {
       setCodeState("Error");
@@ -273,6 +279,7 @@ function Register({ consultorioId, healthCareList }) {
     "birthDate": new Date().toISOString().slice(0, 10),
     "password": "",
     "password2": "",
+    "cellNumberOmitted": false
   })
 
   console.log(formData);
@@ -298,7 +305,8 @@ function Register({ consultorioId, healthCareList }) {
 
 
   const handleChange = (event) => {
-    const { name, value } = event.target;
+    const { name, value } = event.target; 
+
     setFormData(prevState => ({ ...prevState, [name]: value }));
     setErrorMsg("");
   };
@@ -459,32 +467,8 @@ function Register({ consultorioId, healthCareList }) {
                           onChange: handleChange
                         }}
                       />
-                    </GridItem>
-                    <GridItem xs={12} sm={12} md={6}>
-                      <CustomInput
-                        labelText="Celular"
-                        id="cellNumber"
-                        key="cellNumberCustomInput"
-                        formControlProps={{
-                          fullWidth: true,
-                        }}
-                        inputProps={{
-                          name: "cellNumber",
-                          id: "cellNumber",
-                          key: "cellNumber",
-                          value: formData.cellNumber,
-                          required: true,
-                          type: "tel",
-                          autoComplete: "cellNumber",
-                          onChange: handleChange
-                        }}
-                        moreInputProps={{
-                          pattern: "^[0-9]{10}$"
-                        }}
-                      />
-                      <FormHelperText className="formHelper">Se aceptan números de teléfono de 10 dígitos</FormHelperText>
-                    </GridItem>
-                    <GridItem xs={12} sm={12} md={6}>
+                    </GridItem>                    
+                    <GridItem xs={12} sm={12} md={12}>
                       <CustomInput
                         labelText="E-mail"
                         id="email"
@@ -513,6 +497,32 @@ function Register({ consultorioId, healthCareList }) {
                     </GridItem>
                   </> : activeStep === 1 ?
                     <>
+                      <GridItem xs={12} sm={12} md={6}>
+                        <CustomInput
+                          labelText="Celular"
+                          id="cellNumber"
+                          key="cellNumberCustomInput"
+                          formControlProps={{
+                            fullWidth: true,
+                          }}
+                          inputProps={{
+                            name: "cellNumber",
+                            id: "cellNumber",
+                            key: "cellNumber",
+                            value: formData.cellNumberOmitted ? "----------------" : formData.cellNumber,
+                            required: true,
+                            type: "tel",
+                            autoComplete: "cellNumber",
+                            onChange: handleChange,
+                            disabled: formData.cellNumberOmitted
+                          }}
+                          moreInputProps={{
+                            pattern: "^[0-9]{10}$"
+                          }}
+                        />
+                        <FormHelperText className="formHelper">Se aceptan números de teléfono de 10 dígitos</FormHelperText>
+                        {/* <FormControlLabel style={{ pointerEvents: "all" }} onChange={() => setFormData(prevState => ({ ...prevState, cellNumberOmitted: !prevState.cellNumberOmitted }))} className={classes.static} control={<Checkbox name="cellNumberOmitted" size='medium' checked={formData.cellNumberOmitted} />} label="Seleccionar si no recuerda/posee celular)" /> */}
+                      </GridItem>
                       <GridItem xs={12} sm={12} md={6}>
                         <CustomInput
                           labelText="Apellido"

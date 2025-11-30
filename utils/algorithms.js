@@ -85,3 +85,36 @@ export function parseTurns(turns) {
   
     return nextTurnsParsed;
   }
+
+  export function parseEstudios(estudios) {
+    const estudiosMap = new Map();
+  
+    for (const estudio of estudios) {
+      const monthNumber = Number(estudio.fechaEstudio.split("-")[0]);
+      const yearNumber = Number(estudio.fechaEstudio.split("-")[2]);
+  
+      if (estudiosMap.has(monthNumber + "/" + yearNumber)) {
+        estudiosMap.get(monthNumber + "/" + yearNumber).push(estudio);
+      }
+      else {
+        estudiosMap.set(monthNumber + "/" + yearNumber, [estudio]);
+      }
+    }
+  
+    const estudiosParsed = [];
+  
+    for (const [monthAndYear, turns] of estudiosMap) {
+      estudiosParsed.push({ monthNumber: Number(monthAndYear.split("/")[0]), yearNumber: Number(monthAndYear.split("/")[1]), turns });
+    }
+
+    estudiosParsed.sort((a, b) => {
+        if (b.yearNumber < a.yearNumber)
+            return -1;
+        if (b.yearNumber > a.yearNumber)
+            return 1;
+
+        return b.monthNumber - a.monthNumber;
+    })
+  
+    return estudiosParsed;
+  }

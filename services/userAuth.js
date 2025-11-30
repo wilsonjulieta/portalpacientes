@@ -7,7 +7,8 @@ export async function logIn(tipodoc, username, password, consultorioId) {
     let loginResponse;
 
     try {
-        const token = await getToken(); //Si no hay token se va al catch directamente
+        console.log("Consultorio ID: " + consultorioId);
+        const token = await getToken(consultorioId); //Si no hay token se va al catch directamente
 
         const response = await POST(consultorioId, token, "patients/login",
             {

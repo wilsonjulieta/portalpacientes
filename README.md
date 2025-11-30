@@ -53,6 +53,8 @@ If you have questions or need help integrating the product please [contact us](h
 - Clonar la repo
 - Actualmente funciona con Node 14.21.3, las versiones mas nuevas tienen errores de compatibilidad con este template
 - Ademas requiere tener instalada la ultima version de Python
+- - npm install --global --production windows-build-tools
+- - npm install --global node-gyp
 - npm install --force
 - npm run dev
 - Abrir en localhost:3000

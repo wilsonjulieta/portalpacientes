@@ -787,6 +787,13 @@ svg {
 }
 
 /* Estilos gestion turnos */
+/* Estilos estudios */
+
+.informeDialogRoot {
+  padding-inline: 8px;
+}
+
+/* Estilos estudios */
 
 /* Helpers */
 

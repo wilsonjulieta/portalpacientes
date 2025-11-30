@@ -47,12 +47,30 @@ export function getDayOfWeekName(dayNumber) {
     return "";
 }
 
+export function correctDate(dateString) {
+    if (dateString) {
+        const [month, day, year] = dateString.split((/[\/-]/gm));
+        return `${year}-${month}-${day}`;
+    }
+
+    return dateString;
+}
+
 // Recibe string date de api, retorna nombre completo del dia
 export function getFullNameOfDate(dateString, hour) {
-    const dateObject = new Date(dateString);
+    const correctedDate = correctDate(dateString)
+    const dateObject = new Date(correctedDate);
+    const month = (dateObject.getUTCMonth() + 1);
 
-    const date = dateObject.getDate() > 9 ? dateObject.getDate() : "0" + dateObject.getDate();
-    const month = (dateObject.getMonth() + 1);
+    return getDayOfWeekName(dateObject.getUTCDay()) + " " + dateObject.getUTCDate() + " de " + getMonthName(month) + " de " + dateObject.getUTCFullYear() + " | " + hour + "hs";
 
-    return getDayOfWeekName(dateObject.getDay()) + " " + dateObject.getDate() + " de " + getMonthName(month) + " de " + dateObject.getFullYear() + " | " + hour + "hs";
+
+    // let options = {
+    //     weekday: "long",
+    //     year: "numeric",
+    //     month: "long",
+    //     day: "numeric"
+    // }
+    // return dateObject.toLocaleDateString("es-ES", options);
+
 }

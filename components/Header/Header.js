@@ -9,39 +9,42 @@ import List from "@material-ui/core/List";
 import styles from "assets/jss/nextjs-material-dashboard/components/headerStyle.js";
 import { MetaInfoContext } from "../../context/MetaInfoContextProvider";
 import useTheme from "../../hooks/useTheme";
+import { useRouter } from "next/router";
+import Link from "next/dist/client/link";
 
 export default function Header(props) {
   const classes = useTheme(styles);
 
   const { metaInfo } = useContext(MetaInfoContext);
 
-  const { consultorioFullName } = metaInfo;
+  const { consultorioFullName, mainPageLink } = metaInfo;
+  
+  const router = useRouter();
+
+  const {consultorioId} = router.query;
+  
 
   return (
     <header className={classes.appBar + " p-0 m-0 text-white"}>
-      <List className={classes.list}>
-        <ListItem className={classes.inlineBlock}>
-          <span className="p-0 m-0">
-            Inicio
-          </span>
-        </ListItem>
-      </List>
+      <Link href={"/login/" + consultorioId} >
+        <List className={classes.list} style={{cursor: "pointer"}}>
+          <ListItem className={classes.inlineBlock}>
+            <span className="p-0 m-0">
+              Inicio
+            </span>
+          </ListItem>
+        </List>
+      </Link>
 
       <div style={{ paddingRight: "10px" }}>
         <p className={classes.right}>
-          <span>
-            {consultorioFullName} &nbsp;
+          <span>            
             &copy; {1900 + new Date().getYear()}{" "}
-            <a  target="_blank" className={classes.a} href="https://www.iccardiologico.com/">
-              Instituto Clínico Cardiológico
-            </a>
-            <a
-              target="_blank"
-              className={classes.a}
-            >
-
-            </a>
-            &nbsp;
+            {
+              mainPageLink ? <a  target="_blank" className={classes.a + " no-underline"} href={mainPageLink}>
+              {consultorioFullName} &nbsp;
+              </a> : <>{consultorioFullName} &nbsp;</>
+            }
           </span>
         </p>
       </div>

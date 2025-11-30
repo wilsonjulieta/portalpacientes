@@ -107,6 +107,12 @@ function LoginView({ consultorioId }) {
     router.push(currentPath + "/register")
   }
 
+  const handlePasswordRedirect = () => {
+    const currentPath = router.asPath; // get the current URL path
+
+    router.push(currentPath + "/passwordReset")
+  }
+
   return (
     <form method="post" action="/admin/dashboard" onSubmit={handleSubmit} autoComplete="on">
       <GridContainer style={{ width: "100%", height: "80vh", alignItems: "center" }} justify="center">
@@ -179,7 +185,7 @@ function LoginView({ consultorioId }) {
                 <Button type="submit" color="primary" style={{ fontSize: "1.35em" }}>Ingresar</Button>
               </div>
               <div style={{ flex: "1 0 33.33%", textAlign: "right" }} className="botonLoginOlvido">
-                <Button type="button" color="secondarySimple" style={{ padding: "15px 6px" }}>Olvid&eacute; mi contraseña</Button>
+                <Button onClick={handlePasswordRedirect} type="button" color="secondarySimple" style={{ padding: "15px 6px" }}>Olvid&eacute; mi contraseña</Button>
               </div>
             </CardFooter>
           </Card>

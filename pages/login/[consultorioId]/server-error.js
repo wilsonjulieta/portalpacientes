@@ -166,9 +166,9 @@ function ServerError() {
         }, 2500);
     }, [])
 
-    if (router.query.firstTry === "true") {
-        const cookies = parseCookies();
-        destroyCookie(null, "id", {path: "/"})
+    const cookies = parseCookies(null)
+    for (const name in cookies) {
+        destroyCookie(null, name, { path: '/' }) // important: path must match original
     }
     
     return (

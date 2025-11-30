@@ -21,6 +21,16 @@ import { UserContext } from "../context/UserContextProvider";
 import { useContext } from "react";
 import { getPatient } from "../services/userAuth";
 import { useEffect } from "react";
+import Card from "components/Card/Card.js";
+import CardHeader from "components/Card/CardHeader.js";
+import CardBody from "components/Card/CardBody.js";
+import Button from "components/CustomButtons/Button.js";
+import { Dialog, DialogContent } from "@material-ui/core";
+
+import ReportProblemIcon from '@material-ui/icons/ReportProblem';
+import TermsDialog from "../components/Dialogs/TermsDialog";
+import ThemeContextProvider from "../context/ThemeContextProvider";
+import { getMetaInfo } from "../constants/CONFIG";
 
 let ps;
 
@@ -29,6 +39,9 @@ export default function Admin({ children, ...rest }) {
 
   // used for checking current route
   const router = useRouter();
+
+  const { consultorioId } = router.query;
+  const {logo} = getMetaInfo(consultorioId);
 
   // styles
   const useStyles = makeStyles(styles);
@@ -226,7 +239,9 @@ export default function Admin({ children, ...rest }) {
   /* Handle scroll to top on route change */
 
   return (
+    
     <div className={classes.wrapper}>
+      <TermsDialog />
       <Sidebar
         routes={routes}
         logoText={"PORTAL PACIENTES"}
