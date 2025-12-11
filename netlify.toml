@@ -1,6 +1,8 @@
 [build]
   command = "npm run build"
   publish = ".next"
+  [build.environment]
+    NODE_VERSION = "14.21.3"
 [[redirects]]
   from = "/*"
   to = "/index.html"

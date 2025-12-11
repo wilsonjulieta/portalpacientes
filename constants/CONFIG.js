@@ -5,7 +5,7 @@ import THEMES from "./THEMES";
 import icclogo from "assets/img/icclogo.png";
 import lroldanlogo from "assets/img/lroldanlogo.png";
 import setalogo from "assets/img/setalogo.png";
-import ciclogo from "assets/img/ciclogo.png";
+
 import urologo from "assets/img/urologo.png";
 
 const logos = {

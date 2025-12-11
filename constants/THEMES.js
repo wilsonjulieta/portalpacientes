@@ -63,12 +63,12 @@ const THEMES = [
     },
     {
         ...DEFAULT,
-        colorPrimary: "#121492ff",
-        colorSecondary: "#26967eff",
+        colorPrimary: "#0B2E5B",
+        colorSecondary: "#19B882",
         colorNeutral: "#d6d9ed",
         colorSuccess: "green",
-        cardHeaderPrimaryGradientColors: ["#121492ff", "#cdd7e1"],
-        cardHeaderSecondaryGradientColors: ["#26967eff", "#c0ce94"],
+        cardHeaderPrimaryGradientColors: ["#0B2E5B", "#114A7A"],
+        cardHeaderSecondaryGradientColors: ["#19B882", "#2FD39A"],
     },
     {
         ...DEFAULT,

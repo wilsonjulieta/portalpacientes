@@ -17,7 +17,7 @@ export default function getURL(consultorioId) {
         case 'fade':
                 return "https://fademdp.ddns.net:8081/v1/"; 
         default:
-            console.warn('ConsultorioID desconocido: ${consultorioId}');
+            console.warn(`ConsultorioID desconocido: ${consultorioId}`);
             return "https://default-url.com/v1/"; // Cambia esto por la URL por defecto que necesites
     }
 }

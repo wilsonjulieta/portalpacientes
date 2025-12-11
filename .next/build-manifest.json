@@ -15,23 +15,24 @@
   ],
   "pages": {
     "/_app": [
-      "static/chunks/main.js",
       "static/chunks/webpack.js",
-      "static/css/styles.chunk.css",
-      "static/chunks/styles.js",
+      "static/chunks/main.js",
       "static/chunks/pages/_app.js"
     ],
     "/_error": [
-      "static/chunks/main.js",
       "static/chunks/webpack.js",
+      "static/chunks/main.js",
       "static/chunks/pages/_error.js"
     ],
-    "/login/[consultorioId]": [
-      "static/chunks/main.js",
+    "/admin/[consultorioId]/dashboard": [
       "static/chunks/webpack.js",
-      "static/css/styles.chunk.css",
-      "static/chunks/styles.js",
-      "static/chunks/pages/login/[consultorioId].js"
+      "static/chunks/main.js",
+      "static/chunks/pages/admin/[consultorioId]/dashboard.js"
+    ],
+    "/admin/[consultorioId]/estudios": [
+      "static/chunks/webpack.js",
+      "static/chunks/main.js",
+      "static/chunks/pages/admin/[consultorioId]/estudios.js"
     ]
   },
   "ampFirstPages": []
