@@ -58,19 +58,54 @@ export function correctDate(dateString) {
 
 // Recibe string date de api, retorna nombre completo del dia
 export function getFullNameOfDate(dateString, hour) {
-    const correctedDate = correctDate(dateString)
-    const dateObject = new Date(correctedDate);
-    const month = (dateObject.getUTCMonth() + 1);
+    if (!dateString) return "";
 
-    return getDayOfWeekName(dateObject.getUTCDay()) + " " + dateObject.getUTCDate() + " de " + getMonthName(month) + " de " + dateObject.getUTCFullYear() + " | " + hour + "hs";
+    // Remove time part if exists
+    const cleanDate = dateString.split('T')[0];
+    const parts = cleanDate.split(/[\/-]/);
+    
+    let year, month, day;
 
+    if (parts.length === 3) {
+        if (parts[0].length === 4) {
+            // YYYY-MM-DD
+            year = parseInt(parts[0]);
+            month = parseInt(parts[1]);
+            day = parseInt(parts[2]);
+        } else if (parts[2].length === 4) {
+             // MM-DD-YYYY or DD-MM-YYYY
+             const p0 = parseInt(parts[0]);
+             const p1 = parseInt(parts[1]);
+             
+             if (p0 > 12) {
+                 // DD-MM-YYYY
+                 day = p0;
+                 month = p1;
+             } else {
+                 // MM-DD-YYYY (Default legacy assumption)
+                 month = p0;
+                 day = p1;
+             }
+             year = parseInt(parts[2]);
+        }
+    }
 
-    // let options = {
-    //     weekday: "long",
-    //     year: "numeric",
-    //     month: "long",
-    //     day: "numeric"
-    // }
-    // return dateObject.toLocaleDateString("es-ES", options);
+    if (!year || !month || !day) {
+         // Fallback to original behavior if parsing fails
+         const correctedDate = correctDate(dateString);
+         const dateObject = new Date(correctedDate);
+         if (isNaN(dateObject.getTime())) return "";
+         
+         const m = (dateObject.getUTCMonth() + 1);
+         return getDayOfWeekName(dateObject.getUTCDay()) + " " + dateObject.getUTCDate() + " de " + getMonthName(m) + " de " + dateObject.getUTCFullYear() + " | " + hour + "hs";
+    }
 
+    // Construct date object (Local time to avoid UTC shifts)
+    const dateObject = new Date(year, month - 1, day);
+    
+    if (isNaN(dateObject.getTime())) {
+         return "";
+    }
+
+    return getDayOfWeekName(dateObject.getDay()) + " " + dateObject.getDate() + " de " + getMonthName(dateObject.getMonth() + 1) + " de " + dateObject.getFullYear() + " | " + hour + "hs";
 }

@@ -72,6 +72,15 @@ const THEMES = [
     },
     {
         ...DEFAULT,
+        colorPrimary: "#0B2E5B",
+        colorSecondary: "#b98904ff",
+        colorNeutral: "#d6d9ed",
+        colorSuccess: "green",
+        cardHeaderPrimaryGradientColors: ["#0B2E5B", "#114A7A"],
+        cardHeaderSecondaryGradientColors: ["#b98904ff", "#e4a909ff"],
+    },
+    {
+        ...DEFAULT,
         colorPrimary: "turquoise",
         colorSecondary: "orangeRed",
         cardHeaderPrimaryGradientColors: ["turquoise", "cyan"],

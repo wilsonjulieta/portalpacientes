@@ -15,7 +15,7 @@ export default function getURL(consultorioId) {
         case 'cic':
                 return "https://cicbalcarce.dyndns.org:17001/v1/"; 
         case 'fade':
-                return "https://fademdp.ddns.net:8081/v1/"; 
+                return "https://fademdp.ddns.net:9001/v1/"; 
         default:
             console.warn(`ConsultorioID desconocido: ${consultorioId}`);
             return "https://default-url.com/v1/"; // Cambia esto por la URL por defecto que necesites
