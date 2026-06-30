@@ -46,24 +46,24 @@ export async function getServerSideProps(context) {
         if (fechaBase) {
           const date = new Date(fechaBase);
           const dd = String(date.getDate()).padStart(2, '0');
-          const mm = String(date.getMonth() + 1).padStart(2, '0'); 
+          const mm = String(date.getMonth() + 1).padStart(2, '0');
           const yyyy = date.getFullYear();
           fechaFormat = `${dd}/${mm}/${yyyy}`;
         }
-      } catch(e) {}
-      
+      } catch (e) { }
+
       let medicoText = "Médico";
       let especialidadText = "-";
       if (item.doctor) {
-         if (typeof item.doctor === 'string') {
-             medicoText = item.doctor;
-         } else {
-             medicoText = item.doctor.name || item.doctor.nombre || item.profesional || "Médico";
-             especialidadText = item.doctor.specialty || item.doctor.especialidad || item.especialidad || "-";
-         }
+        if (typeof item.doctor === 'string') {
+          medicoText = item.doctor;
+        } else {
+          medicoText = item.doctor.name || item.doctor.nombre || item.profesional || "Médico";
+          especialidadText = item.doctor.specialty || item.doctor.especialidad || item.especialidad || "-";
+        }
       } else {
-         medicoText = item.profesional || "Médico";
-         especialidadText = item.especialidad || "-";
+        medicoText = item.profesional || "Médico";
+        especialidadText = item.especialidad || "-";
       }
 
       let indicacionesText = item.diagnosis || "Ver PDF para más detalles";
