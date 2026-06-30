@@ -74,6 +74,9 @@ function LoginView({ consultorioId }) {
     // loginResponse = {message: "Sus datos están cargados pero no se encuentra registrado. Ingrese a \"registrarse\"."}
 
     if (loginResponse.loggedIn) {
+      const envioArchivosHabilitado =
+        loginResponse?.data?.archivos_habilitado ?? loginResponse?.data?.enviar_archivos_habilitado;
+
       sessionStorage.setItem("id", loginResponse.data.id);
       sessionStorage.setItem("token", loginResponse.token);
 
@@ -87,7 +90,15 @@ function LoginView({ consultorioId }) {
         path: '/',
       });
 
-      setUser({...loginResponse.data, consultorioId});
+      if (envioArchivosHabilitado !== undefined) {
+        sessionStorage.setItem("archivos_habilitado", envioArchivosHabilitado ? "1" : "0");
+        setCookie(null, 'archivos_habilitado', envioArchivosHabilitado ? "1" : "0", {
+          maxAge: 50 * 365 * 24 * 60 * 60,
+          path: '/',
+        });
+      }
+
+      setUser({ ...loginResponse.data, consultorioId, archivos_habilitado: envioArchivosHabilitado });
 
       router.push("/admin/" + consultorioId + "/dashboard");
       return true

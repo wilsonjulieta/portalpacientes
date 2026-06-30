@@ -65,9 +65,36 @@ function InformesDialog({ open, setOpen, archivos = [] }) {
     setOpen(false);
   }
 
-  const openFile = async (idArchivo) => {
-    openPdfFromApi(user.consultorioId, await GLOBAL_GET_TOKEN(), idArchivo);
+const openFile = async (archivo) => {
+  const token = await GLOBAL_GET_TOKEN();
+
+  if (archivo.url) {
+    const response = await fetch(`${process.env.REACT_APP_API_URL}${archivo.url}`, {
+      method: "GET",
+      headers: {
+        Authorization: `Bearer ${token}`
+      }
+    });
+
+    if (!response.ok) {
+      throw new Error("No se pudo abrir el informe");
+    }
+
+    const blob = await response.blob();
+    const fileURL = window.URL.createObjectURL(blob);
+    
+    const link = document.createElement('a');
+    link.href = fileURL;
+    link.target = '_blank';
+    link.download = `informe_${archivo.id || 'estudio'}.pdf`;
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+    return;
   }
+
+  openPdfFromApi(user.consultorioId, token, archivo.idArchivo);
+};
 
   return (
     <Dialog
@@ -93,7 +120,7 @@ function InformesDialog({ open, setOpen, archivos = [] }) {
                         <label className="">
                           <label style={{ fontSize: '18px' }}><b>Informe Realizado: </b><label style={{ fontSize: '14px' }}></label></label><br />
                         </label >
-                        <Button onClick={() => openFile(archivo.idArchivo)} color="primary" style={{ paddingRight: "10px", paddingLeft: "10px", textAlign: "center", marginLeft: "auto" }}><OpenInNewIcon />&nbsp; Abrir</Button>
+                        <Button onClick={() => openFile(archivo)} color="primary" style={{ paddingRight: "10px", paddingLeft: "10px", textAlign: "center", marginLeft: "auto" }}><OpenInNewIcon />&nbsp; Abrir</Button>
                       </div>
                     }
                   />

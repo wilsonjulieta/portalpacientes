@@ -28,6 +28,12 @@ export default function Sidebar(props) {
 
   const { user } = useContext(UserContext); 
   
+  const envioArchivosHabilitado =
+    user?.archivos_habilitado === true || user?.enviar_archivos_habilitado === true
+      ? true
+      : user?.archivos_habilitado === false || user?.enviar_archivos_habilitado === false
+        ? false
+        : true;
 
   // creates styles for this component
   const useStyles = makeStyles(styles);
@@ -39,7 +45,9 @@ export default function Sidebar(props) {
   const { color, logo, image, logoText, routes } = props;
   var links = (
     <List className={classes.list}>
-      {routes.filter(route => !route.requierePortal || user.portal_habilitado).map((prop, key) => {
+      {routes
+        .filter(route => (!route.requierePortal || user.portal_habilitado) && (!route.requiereEnvioArchivos || envioArchivosHabilitado))
+        .map((prop, key) => {
         const whiteFontClasses = classNames({
           [" " + classes.whiteFont]:
             activeRoute(prop.layout + prop.path) ||

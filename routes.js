@@ -72,6 +72,21 @@ const dashboardRoutes = [
     requierePortal: true,
     layout: "/admin",
   },
+  {
+    path: "/archivos",
+    name: "Enviar Archivos",
+    rtlName: "ملف تعريفي للمستخدم",
+    icon: LocalHospitalIcon,
+    requiereEnvioArchivos: true,
+    layout: "/admin",
+  },
+  {
+    path: "/recetas",
+    name: "Mis Recetas",
+    rtlName: "ملف تعريفي للمستخدم",
+    icon: Recetas,
+    layout: "/admin",
+  },
   // {
   //   path: "/solicitarReceta",
   //   name: "Solicitar Receta",

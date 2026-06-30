@@ -18,13 +18,22 @@ const THEMES = [
     {
         ...DEFAULT,
         colorPrimary: "#073763",
-        colorSecondary: "#f44336",
+        colorSecondary: "#7b99ebff",
         colorNeutral: "#d6d9ed",
         colorSuccess: "green",
         cardHeaderPrimaryGradientColors: ["#073763", "#839bb1"],
-        cardHeaderSecondaryGradientColors: ["#a30000", "#db4c4c"],
+        cardHeaderSecondaryGradientColors: ["#7b99ebff", "#dedcf3ff"],
     },  
-
+    // //TODO: REMOVE THEME, ONLY FOR TESTING
+    // {
+    //     ...DEFAULT,
+    //     colorPrimary: "yellow",
+    //     colorSecondary: "purple",
+    //     colorNeutral: "green",
+    //     colorSuccess: "red",
+    //     cardHeaderPrimaryGradientColors: ["blue", "gold"],
+    //     cardHeaderSecondaryGradientColors: ["purple", "brown"],
+    // },
     {
         ...DEFAULT,
         colorPrimary: "#073763",
@@ -54,12 +63,12 @@ const THEMES = [
     },
     {
         ...DEFAULT,
-        colorPrimary: "#121492ff",
-        colorSecondary: "#26967eff",
-        colorNeutral: "#d6d9ed",
+        colorPrimary: "#636160ff",
+        colorSecondary: "#cc4015ff",
+        colorNeutral: "#ede2d6ff",
         colorSuccess: "green",
-        cardHeaderPrimaryGradientColors: ["#121492ff", "#cdd7e1"],
-        cardHeaderSecondaryGradientColors: ["#26967eff", "#c0ce94"],
+        cardHeaderPrimaryGradientColors: ["#cc4015ff", "#ddaf83ff"],
+        cardHeaderSecondaryGradientColors: ["#636160ff", "#949493ff"],
     },
     {
         ...DEFAULT,
@@ -78,6 +87,15 @@ const THEMES = [
         colorSuccess: "green",
         cardHeaderPrimaryGradientColors: ["#0B2E5B", "#114A7A"],
         cardHeaderSecondaryGradientColors: ["#b98904ff", "#e4a909ff"],
+    },
+     {
+        ...DEFAULT,
+        colorPrimary: "#917b43ff",
+        colorSecondary: "#c2aa85ff",
+        colorNeutral: "#d6d9ed",
+        colorSuccess: "green",
+        cardHeaderPrimaryGradientColors: ["#917b43ff", "#dac48dff"],
+        cardHeaderSecondaryGradientColors: ["#c2aa85ff", "#f0d2a5ff"],
     },
     {
         ...DEFAULT,

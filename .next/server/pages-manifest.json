@@ -2,6 +2,6 @@
   "/_app": "pages/_app.js",
   "/_document": "pages/_document.js",
   "/_error": "pages/_error.js",
-  "/login/[consultorioId]": "pages/login/[consultorioId].js",
-  "/login/[consultorioId]/register": "pages/login/[consultorioId]/register.js"
+  "/admin/[consultorioId]/recetas": "pages/admin/[consultorioId]/recetas.js",
+  "/admin/[consultorioId]/dashboard": "pages/admin/[consultorioId]/dashboard.js"
 }

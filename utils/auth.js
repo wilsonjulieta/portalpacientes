@@ -28,6 +28,8 @@ export async function serverSidePropsAuth() {
 export function logout(router) {
     destroyCookie(null, "id", {path: "/"});
     destroyCookie(null, "dni", {path: "/"});
+    destroyCookie(null, "token", {path: "/"});
+    destroyCookie(null, "archivos_habilitado", {path: "/"});
     sessionStorage.clear();
     router.push("/");
 }

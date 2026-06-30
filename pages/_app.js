@@ -128,6 +128,14 @@ export default class MyApp extends App {
         }
         
         initUser = patientResponse.data;
+
+        if (
+          cookies.archivos_habilitado !== undefined &&
+          initUser?.archivos_habilitado === undefined &&
+          initUser?.enviar_archivos_habilitado === undefined
+        ) {
+          initUser = { ...initUser, archivos_habilitado: cookies.archivos_habilitado === "1" };
+        }
         
         if (!router.asPath.includes("admin") && !router.asPath.includes("testing")) {
           ctx.res.writeHead(302, {

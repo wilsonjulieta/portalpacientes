@@ -16,7 +16,8 @@ const logos = {
     "test": undefined,
     "seta": setalogo,
     "cic": undefined,
-    "fade": undefined
+    "fade": undefined,
+    "ngonzalez": undefined
 }
 
 const solicitarTurnoMessages = {
@@ -27,7 +28,8 @@ const solicitarTurnoMessages = {
     "test": "Mensaje de solicitar turno para test",
     "seta": "",
     "cic": "",
-    "fade": ""
+    "fade": "",
+    "ngonzalez":"Los turnos que se obtienen son sólo para consulta, para otros estudios comunicarse telefónicamente."
 }
 
 
@@ -39,7 +41,8 @@ const consultoriosNameToId = {
     "test": 0,
     "seta": 3,
     "cic": "4",
-    "fade": "6"
+    "fade": "6",
+    "ngonzalez": "7"
 }
 
 const consultoriosFullName = {
@@ -50,7 +53,8 @@ const consultoriosFullName = {
     "test": "Instituto test",
     "seta": "Instituto SETA",
     "cic": "Centro Integral de Salud",
-    "fade": "Centro Psicológico Psiquiátrico"
+    "fade": "Centro Psicológico Psiquiátrico",
+    "ngonzalez": "Consultorio Oftalmológico"
 }
 
 const pageTitles = {
@@ -61,7 +65,8 @@ const pageTitles = {
     "test": "Portal De Testing",
     "seta": "Portal Pacientes",
     "cic": "Portal Pacientes",
-    "fade": "Portal Pacientes"
+    "fade": "Portal Pacientes",
+    "ngonzalez": "Portal Pacientes"
 }
 
 const favIconRoutes = {
@@ -72,7 +77,8 @@ const favIconRoutes = {
     "test": "test.png",
     "seta": "test.png",
     "cic": "test.png",
-    "fade": "test.png"
+    "fade": "test.png",
+    "ngonzalez": "test.png"
 }
 
 /**
@@ -86,7 +92,8 @@ const mainPageLinks = {
     "test": "",
     "seta": "https://institutoseta.com.ar/",
     "cic": "",
-    "fade": ""
+    "fade": "",
+    "ngonzalez": ""
 }
 
 
@@ -171,11 +178,49 @@ const terms = {
     Estos Términos y Condiciones se rigen por las leyes de la República Argentina. Cualquier disputa relacionada con su uso del sitio web será sometida a los tribunales competentes en la Ciudad Autónoma de Buenos Aires.
     9. Contacto
     Si tiene alguna pregunta sobre estos Términos y Condiciones, puede ponerse en contacto con nosotros en info@thisys.net.ar.`,
+   
+    "ngonzalez": `Términos y Condiciones de Uso
+    1. Introducción
+    Bienvenido a THISYS Portal Salud, diseñado para brindar mejor calidad de atención a los pacientes, en el cual los usuarios registrados podrán acceder a turnos programados, recetas de medicamentos e información de su salud. Al acceder y utilizar este sitio web, usted acepta estos Términos y Condiciones. Si no está de acuerdo con estos términos, le solicitamos que no utilice el sitio.
+    2. Aceptación de los Términos
+    Al navegar y utilizar este sitio web, usted acepta cumplir con los términos y condiciones descritos aquí. Nos reservamos el derecho de modificar estos términos en cualquier momento y dichos cambios serán notificados oportunamente.
+    3. Recopilación de Datos a Través del Sitio
+    Este sitio web recopila información personal a través del ingreso de datos personales y  registro de usuarios. Los datos recopilados incluyen documento, apellido y nombre del paciente, fecha de nacimiento, sexo, datos de contacto y cobertura médica y serán utilizados para proporcionar servicios personalizados.
+    4. Uso de Cookies
+    Este sitio web utiliza cookies para mejorar su experiencia de usuario y personalizar el contenido que recibe. Las cookies son pequeños archivos que se almacenan en su dispositivo al navegar por sitios web. Para obtener más información, consulte nuestra Política de Cookies.
+    5. Seguridad
+    Implementamos medidas de seguridad adecuadas para proteger los datos personales que nos proporciona a través del sitio, utilizando conexiones seguras (HTTPS), cifrado de datos y autenticación en áreas protegidas del sitio.
+    6. Derechos del Usuario
+    Conforme a la Ley 25.326 de Protección de los Datos Personales, usted tiene derecho a acceder, rectificar, actualizar y solicitar la eliminación de sus datos personales proporcionados a través de este sitio web. Para ejercer estos derechos, por favor contáctenos en info@thisys.net.ar.
+    7. Política de Enlaces Externos
+    Este sitio web puede contener enlaces a sitios web operados por terceros. No nos hacemos responsables del contenido ni de las políticas de privacidad de dichos sitios. Al acceder a ellos, lo hace bajo su propia responsabilidad.
+    8. Jurisdicción y Ley Aplicable
+    Estos Términos y Condiciones se rigen por las leyes de la República Argentina. Cualquier disputa relacionada con su uso del sitio web será sometida a los tribunales competentes en la Ciudad Autónoma de Buenos Aires.
+    9. Contacto
+    Si tiene alguna pregunta sobre estos Términos y Condiciones, puede ponerse en contacto con nosotros en info@thisys.net.ar.`,
 
 
-    "test": new Array(5)
-        .fill("\ntest tyc")
-        .join(""),
+
+    "test": `Términos y Condiciones de Uso
+    1. Introducción
+    Bienvenido a THISYS Portal Salud, diseñado para brindar mejor calidad de atención a los pacientes, en el cual los usuarios registrados podrán acceder a turnos programados, recetas de medicamentos e información de su salud. Al acceder y utilizar este sitio web, usted acepta estos Términos y Condiciones. Si no está de acuerdo con estos términos, le solicitamos que no utilice el sitio.
+    2. Aceptación de los Términos
+    Al navegar y utilizar este sitio web, usted acepta cumplir con los términos y condiciones descritos aquí. Nos reservamos el derecho de modificar estos términos en cualquier momento y dichos cambios serán notificados oportunamente.
+    3. Recopilación de Datos a Través del Sitio
+    Este sitio web recopila información personal a través del ingreso de datos personales y  registro de usuarios. Los datos recopilados incluyen documento, apellido y nombre del paciente, fecha de nacimiento, sexo, datos de contacto y cobertura médica y serán utilizados para proporcionar servicios personalizados.
+    4. Uso de Cookies
+    Este sitio web utiliza cookies para mejorar su experiencia de usuario y personalizar el contenido que recibe. Las cookies son pequeños archivos que se almacenan en su dispositivo al navegar por sitios web. Para obtener más información, consulte nuestra Política de Cookies.
+    5. Seguridad
+    Implementamos medidas de seguridad adecuadas para proteger los datos personales que nos proporciona a través del sitio, utilizando conexiones seguras (HTTPS), cifrado de datos y autenticación en áreas protegidas del sitio.
+    6. Derechos del Usuario
+    Conforme a la Ley 25.326 de Protección de los Datos Personales, usted tiene derecho a acceder, rectificar, actualizar y solicitar la eliminación de sus datos personales proporcionados a través de este sitio web. Para ejercer estos derechos, por favor contáctenos en info@thisys.net.ar.
+    7. Política de Enlaces Externos
+    Este sitio web puede contener enlaces a sitios web operados por terceros. No nos hacemos responsables del contenido ni de las políticas de privacidad de dichos sitios. Al acceder a ellos, lo hace bajo su propia responsabilidad.
+    8. Jurisdicción y Ley Aplicable
+    Estos Términos y Condiciones se rigen por las leyes de la República Argentina. Cualquier disputa relacionada con su uso del sitio web será sometida a los tribunales competentes en la Ciudad Autónoma de Buenos Aires.
+    9. Contacto
+    Si tiene alguna pregunta sobre estos Términos y Condiciones, puede ponerse en contacto con nosotros en info@thisys.net.ar.`,
+
 }
 
 export function getTheme(consultorioId) {

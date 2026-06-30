@@ -57,6 +57,18 @@ export async function POST(consultorioId, token, relativeRoute, body) {
     return response;
 }
 
+export async function POST_FORMDATA(consultorioId, token, relativeRoute, formData) {
+    const response = await fetch(getURL(consultorioId) + relativeRoute, {
+        method: 'POST',
+        headers: {
+            'Authorization': `bearer ${token}`,
+        },
+        body: formData
+    })
+
+    return response;
+}
+
 export async function PUT(consultorioId, token, relativeRoute, body) {
     const response = await fetch(getURL(consultorioId) + relativeRoute, {
         method: 'PUT',

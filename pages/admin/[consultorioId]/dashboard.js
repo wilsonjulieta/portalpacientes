@@ -163,17 +163,17 @@ function Dashboard({ nextTurns }) {
                     </Button>
                   </a>
                 </Link>}
-                {/* <Link passHref href={{
-                  pathname: '/admin/[consultorioId]/solicitarReceta',
+                <Link passHref href={{
+                  pathname: '/admin/[consultorioId]/recetas',
                   query: { consultorioId },
                 }}>
                   <a style={{ width: "100%" }}>
-                    <Button color="secondaryOutlined" style={{ fontSize: "1.25em", width: "100%" }}>
-                      <AddIcon style={{ fontSize: "1.25em" }} />
-                      Solicitar Receta
+                    <Button color="primary" style={{ fontSize: "1.1em", width: "100%" }}>
+                      <RecetasIcon style={{ fontSize: "1.25em" }} />
+                      Mis Recetas
                     </Button>
                   </a>
-                </Link> */}
+                </Link>
               </div>
             </CardBody>
           </Card>
