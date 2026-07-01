@@ -24,8 +24,9 @@ export async function getServerSideProps(context) {
     };
   }
 
-  const dni = patientResponse.data.dni;
-  const recetasResponse = await getRecetas(consultorioId, token, dni);
+  const patientId = patientResponse.data.id;
+  const healthCenterId = patientResponse.data.healthCenterId;
+  const recetasResponse = await getRecetas(consultorioId, token, patientId, healthCenterId);
 
   let recetasData = [];
   if (recetasResponse.success && Array.isArray(recetasResponse.data)) {
