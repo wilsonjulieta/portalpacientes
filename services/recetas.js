@@ -1,10 +1,10 @@
 import { GET } from "./FETCH.JS";
 
-export async function getRecetas(consultorioId, token, dnipaciente) {
+export async function getRecetas(consultorioId, token, patientId, healthCenterId) {
     let recetasResponse;
 
     try {
-        const response = await GET(consultorioId, token, `Patients/${dnipaciente}/recetas?healthCenterId=${consultorioId}&type=prescription`);
+        const response = await GET(consultorioId, token, `Patients/${patientId}/recetas?healthCenterId=${healthCenterId}&type=prescription`);
 
         if (response.status !== 200) {
             if (response.headers.get("content-type")?.includes("application/json")) {

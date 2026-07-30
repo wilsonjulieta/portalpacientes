@@ -24,9 +24,9 @@ export async function getServerSideProps(context) {
     };
   }
 
-  const dni = patientResponse.data.dni;
-  
-  const recetasResponse = await getRecetas(consultorioId, token, dni);
+  const patientId = patientResponse.data.id;
+  const healthCenterId = patientResponse.data.healthCenterId;
+  const recetasResponse = await getRecetas(consultorioId, token, patientId, healthCenterId);
 
   let recetasData = [];
   if (recetasResponse.success && Array.isArray(recetasResponse.data)) {
@@ -85,10 +85,6 @@ export async function getServerSideProps(context) {
       }
 
       let indicacionesText = item.diagnosis || "Ver PDF para más detalles";
-      
-      let estadoFormat = "Activa";
-      if (item.status === "canceled") estadoFormat = "Vencida";
-      if (item.status === "created") estadoFormat = "Activa";
 
       return {
         id: index,
