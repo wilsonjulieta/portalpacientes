@@ -25,16 +25,25 @@ export async function getServerSideProps(context) {
   }
 
   const dni = patientResponse.data.dni;
+  
   const recetasResponse = await getRecetas(consultorioId, token, dni);
 
   let recetasData = [];
   if (recetasResponse.success && Array.isArray(recetasResponse.data)) {
-    recetasData = recetasResponse.data.map((item, index) => {
+    const filteredData = recetasResponse.data.filter(item => {
+      // Aseguramos que la receta pertenezca al consultorioId actual
+      if (item.healthCenterId) return String(item.healthCenterId) === String(consultorioId);
+      if (item.center_id) return String(item.center_id) === String(consultorioId);
+      if (item.consultorioId) return String(item.consultorioId) === String(consultorioId);
+      return true; // Si no tiene propiedad, confiamos en el filtro del backend
+    });
+
+    recetasData = filteredData.map((item, index) => {
       // Safely handle medicamentos array
       let medArray = item.medicines || item.medicamentos || item["coleccion_de_medicamentos"] || item.coleccionDeMedicamentos;
       let medicamentosTexto = "Prescripción médica";
       if (Array.isArray(medArray)) {
-        medicamentosTexto = medArray.join(", ");
+        medicamentosTexto = medArray.map(m => m.text || m).join(", ");
       } else if (typeof medArray === "string") {
         medicamentosTexto = medArray;
       }
@@ -44,11 +53,18 @@ export async function getServerSideProps(context) {
       const fechaBase = item.date || item.fecha;
       try {
         if (fechaBase) {
-          const date = new Date(fechaBase);
-          const dd = String(date.getDate()).padStart(2, '0');
-          const mm = String(date.getMonth() + 1).padStart(2, '0');
-          const yyyy = date.getFullYear();
-          fechaFormat = `${dd}/${mm}/${yyyy}`;
+          if (typeof fechaBase === 'string' && fechaBase.includes('-')) {
+            const parts = fechaBase.split('T')[0].split('-');
+            if (parts.length === 3) {
+              fechaFormat = `${parts[2]}/${parts[1]}/${parts[0]}`;
+            }
+          } else {
+            const date = new Date(fechaBase);
+            const dd = String(date.getDate()).padStart(2, '0');
+            const mm = String(date.getMonth() + 1).padStart(2, '0');
+            const yyyy = date.getFullYear();
+            fechaFormat = `${dd}/${mm}/${yyyy}`;
+          }
         }
       } catch (e) { }
 
@@ -58,7 +74,9 @@ export async function getServerSideProps(context) {
         if (typeof item.doctor === 'string') {
           medicoText = item.doctor;
         } else {
-          medicoText = item.doctor.name || item.doctor.nombre || item.profesional || "Médico";
+          const docName = item.doctor.name || item.doctor.nombre || "";
+          const docSurname = item.doctor.surname || item.doctor.apellido || "";
+          medicoText = `${docName} ${docSurname}`.trim() || item.profesional || "Médico";
           especialidadText = item.doctor.specialty || item.doctor.especialidad || item.especialidad || "-";
         }
       } else {
@@ -67,6 +85,10 @@ export async function getServerSideProps(context) {
       }
 
       let indicacionesText = item.diagnosis || "Ver PDF para más detalles";
+      
+      let estadoFormat = "Activa";
+      if (item.status === "canceled") estadoFormat = "Vencida";
+      if (item.status === "created") estadoFormat = "Activa";
 
       return {
         id: index,
@@ -77,7 +99,7 @@ export async function getServerSideProps(context) {
         especialidad: especialidadText,
         fechaEmision: fechaFormat,
         fechaVencimiento: "-",
-        estado: "Activa"
+        estado: estadoFormat
       };
     });
   }

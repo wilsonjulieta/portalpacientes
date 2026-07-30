@@ -1,8 +1,24 @@
+// Helper for iOS/Safari date parsing
+export function getSafeDateString(dateString) {
+    if (typeof dateString !== 'string') return dateString;
+    if (dateString.endsWith('Z') || dateString.match(/(\+|-)\d{2}:\d{2}$/)) {
+        return dateString;
+    }
+    return dateString.replace(/-/g, '/').replace('T', ' ');
+}
+
 //Formato estandar de dd/mm/yy
 export function dayMonthYear(apiDate) {
-    const date = new Date(apiDate);
+    if (!apiDate) return "";
+    const safeDate = getSafeDateString(apiDate);
+    const date = new Date(safeDate);
 
-    return date.getDate() + "/" + (date.getMonth() + 1) + "/" + date.getFullYear();
+    if (isNaN(date.getTime())) return "Fecha inválida";
+
+    const day = date.getDate() > 9 ? date.getDate() : "0" + date.getDate();
+    const month = (date.getMonth() + 1) > 9 ? (date.getMonth() + 1) : "0" + (date.getMonth() + 1);
+
+    return day + "/" + month + "/" + date.getFullYear();
 }
 
 /* Recibe MM-DD-YYYY, retorna DD/MM */
@@ -10,7 +26,7 @@ export function fullDateToDayMonth(dateString) {
     if (!dateString) return "";
     
     // Convertir guiones a barras para que iOS/Safari no falle al parsear la fecha
-    const safeDateString = typeof dateString === 'string' ? dateString.replace(/-/g, '/') : dateString;
+    const safeDateString = getSafeDateString(dateString);
     const dateObject = new Date(safeDateString);
 
     if (isNaN(dateObject.getTime())) return "Fecha inválida";
@@ -54,12 +70,7 @@ export function getDayOfWeekName(dayNumber) {
 }
 
 export function correctDate(dateString) {
-    if (dateString) {
-        const [month, day, year] = dateString.split((/[\/-]/gm));
-        return `${year}-${month}-${day}`;
-    }
-
-    return dateString;
+    return getSafeDateString(dateString);
 }
 
 // Recibe string date de api, retorna nombre completo del dia

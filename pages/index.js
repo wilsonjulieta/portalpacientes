@@ -7,6 +7,10 @@ export async function getServerSideProps(ctx) {
   // Parse
   const cookies = nookies.get(ctx);
 
+  if (ctx.res && ctx.res.headersSent) {
+    return { props: {} };
+  }
+
   if (cookies.consultorioId) {
     return {
       redirect: {

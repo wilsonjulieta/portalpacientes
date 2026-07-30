@@ -25,6 +25,7 @@ import OpenInNewIcon from '@material-ui/icons/OpenInNew';
 import { openPdfFromApi } from "../../services/pdfs";
 import GLOBAL_GET_TOKEN from "../../utils/token";
 import { UserContext } from "../../context/UserContextProvider";
+import getURL from "../../constants/URL";
 
 const styles = ({
   ...adminStyles(),
@@ -69,7 +70,11 @@ const openFile = async (archivo) => {
   const token = await GLOBAL_GET_TOKEN();
 
   if (archivo.url) {
-    const response = await fetch(`${process.env.REACT_APP_API_URL}${archivo.url}`, {
+    const baseURL = process.env.NEXT_PUBLIC_API_URL || getURL(user.consultorioId);
+    const apiBase = baseURL.endsWith('/') ? baseURL.slice(0, -1) : baseURL;
+    const url = archivo.url.startsWith('/') ? archivo.url : `/${archivo.url}`;
+
+    const response = await fetch(`${apiBase}${url}`, {
       method: "GET",
       headers: {
         Authorization: `Bearer ${token}`
@@ -93,7 +98,7 @@ const openFile = async (archivo) => {
     return;
   }
 
-  openPdfFromApi(user.consultorioId, token, archivo.idArchivo);
+  openPdfFromApi(user.consultorioId, token, archivo.idArchivo || archivo.id);
 };
 
   return (

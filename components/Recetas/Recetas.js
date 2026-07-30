@@ -222,59 +222,57 @@ export default function Recetas({ recetas = [], ...props }) {
                   <CardBody style={{ paddingTop: 0, paddingLeft: "5px", marginBottom: "16px" }}>
                     {month.recetas.map((receta, index) => (
                       <List key={receta.id}>
-                        <ListItem>
+                        <ListItem alignItems="flex-start" style={{ paddingTop: "12px", paddingBottom: "12px" }}>
                           {/* Fecha de emisión a la izquierda */}
-                          <ListItemAvatar>
-                            <label className={classes.colorPrimary}>
-                              <label style={{ fontSize: "20px" }}>
-                                <b>{receta.fechaEmision.split("/")[0]}/{receta.fechaEmision.split("/")[1]}&nbsp;&nbsp;</b>
-                              </label>
-                              <br />
-                            </label>
-                          </ListItemAvatar>
+                          <div style={{ minWidth: "60px", marginTop: "2px", marginRight: "10px" }}>
+                            <span className={classes.colorPrimary} style={{ fontSize: "20px", fontWeight: "bold" }}>
+                              {receta.fechaEmision.split("/")[0]}/{receta.fechaEmision.split("/")[1]}
+                            </span>
+                          </div>
 
                           {/* Datos centrales */}
                           <ListItemText
+                            disableTypography
+                            style={{ margin: 0 }}
                             primary={
-                              <>
-                                <label>
-                                  <label style={{ fontSize: "18px" }}>
-                                    <b>{receta.medicamento}</b>
-                                  </label>
-                                  <br />
-                                  <label style={{ fontSize: "14px" }}>{receta.dosis}</label>
-                                  <br />
-                                  <label style={{ fontSize: "15px" }}>
-                                    <b>Médico: </b>
-                                    <label style={{ fontSize: "14px" }}>{receta.medico}</label>
-                                  </label>
-                                  <br />
-                                  <label style={{ fontSize: "15px" }}>
+                              <div style={{ display: "flex", flexDirection: "column", gap: "4px", paddingRight: "16px" }}>
+                                <span style={{ fontSize: "16px", fontWeight: "bold", lineHeight: 1.3, color: "#333" }}>
+                                  {receta.medicamento}
+                                </span>
+                                {receta.dosis && receta.dosis !== "-" && (
+                                  <span style={{ fontSize: "14px", color: "#555" }}>{receta.dosis}</span>
+                                )}
+                                <span style={{ fontSize: "14px" }}>
+                                  <b>Médico: </b>
+                                  <span style={{ color: "#333" }}>{receta.medico}</span>
+                                </span>
+                                {receta.fechaVencimiento && receta.fechaVencimiento !== "-" && (
+                                  <span style={{ fontSize: "14px" }}>
                                     <b>Vence: </b>
-                                    <label
+                                    <span
                                       style={{
-                                        fontSize: "14px",
                                         color: receta.estado === "Vencida" ? "#e53935" : "inherit",
                                         fontWeight: receta.estado === "Vencida" ? "600" : "400",
                                       }}
                                     >
                                       {receta.fechaVencimiento}
-                                    </label>
-                                  </label>
-                                  <br />
+                                    </span>
+                                  </span>
+                                )}
+                                <div style={{ marginTop: "4px" }}>
                                   <EstadoChip estado={receta.estado} />
-                                </label>
-                              </>
+                                </div>
+                              </div>
                             }
                           />
 
                           {/* Botones a la derecha */}
-                          <ListItemAvatar style={{ display: "flex", flexDirection: "column", gap: "6px", alignItems: "flex-end" }}>
+                          <div style={{ display: "flex", flexDirection: "column", gap: "8px", minWidth: "150px", alignItems: "flex-end" }}>
                             <Button
                               onClick={() => handleOpen(receta)}
                               color="primaryOutlined"
                               size="sm"
-                              style={{ paddingRight: "10px", paddingLeft: "10px", whiteSpace: "nowrap" }}
+                              style={{ paddingRight: "10px", paddingLeft: "10px", whiteSpace: "nowrap", width: "100%", justifyContent: "center" }}
                               id={"btn-detalle-" + receta.id}
                             >
                               <InfoIcon style={{ fontSize: "1rem", marginRight: "4px" }} />
@@ -284,13 +282,13 @@ export default function Recetas({ recetas = [], ...props }) {
                               onClick={() => handleDescargar(receta)}
                               color="primary"
                               size="sm"
-                              style={{ paddingRight: "10px", paddingLeft: "10px", whiteSpace: "nowrap" }}
+                              style={{ paddingRight: "10px", paddingLeft: "10px", whiteSpace: "nowrap", width: "100%", justifyContent: "center" }}
                               id={"btn-pdf-" + receta.id}
                             >
                               <GetAppIcon style={{ fontSize: "1rem", marginRight: "4px" }} />
                               Descargar PDF
                             </Button>
-                          </ListItemAvatar>
+                          </div>
                         </ListItem>
 
                         {index < month.recetas.length - 1 && <hr />}
